@@ -25,7 +25,7 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
     };
     return (
          // sidebar started
-        <div className={`bg-inv-bg text-primary  shadow absolute transition-all duration-300 ease-in-out top-0  w-64 h-full z-60 ${isSidebarOpen ? 'left-[0]' : 'left-[-270px]'}`} >
+        <div className={`bg-inv-bg text-primary  shadow absolute transition-all duration-300 ease-in-out top-0  w-64 h-full z-[60] ${isSidebarOpen ? 'left-[0]' : 'left-[-270px]'}`} >
             {/* Your sidebar content */}
             <div className='flex flex-col h-full justify-between'>
                 <div className="">
