@@ -6,7 +6,6 @@ const useNewsData = (category) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  console.log(category);
   useEffect(() => {
     
     // Define the function inside useEffect to avoid stale closures

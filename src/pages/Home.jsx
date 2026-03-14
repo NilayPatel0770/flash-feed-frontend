@@ -14,7 +14,7 @@ const Home = () => {
     return <p className="text-center mt-10">Error loading news</p>;
   }
   return (
-    <div>
+    <div className="px-4">
       {allNews.map((res) => (
         //passing news data to card UI
         <Card news={res} key={res.hash_id} />

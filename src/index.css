@@ -35,7 +35,8 @@
   --color-text-muted: #d1d5db;
   --color-fill: #101b30;
   --color-inverted: #fff;
-  --color-card-bg-fill: #f7f9fb;
+  --color-fill: #0a0f1a;          /* Very dark navy for body */
+  --color-card-bg-fill: #1e293b;  /* Lighter navy for cards (elevation) */
 }
 
 @layer base {
