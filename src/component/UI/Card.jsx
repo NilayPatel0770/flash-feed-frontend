@@ -45,7 +45,7 @@ const Card = ({ news }) => {
           />
           <div>
             <p className="font-bold text-sm md:text-base text-primary">
-              Short by: {news.author_name}
+              Short by: {news.news_obj.author_name}
             </p>
             <p className="text-xs md:text-sm text-primary">{formattedDate}</p>
           </div>
