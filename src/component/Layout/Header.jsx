@@ -26,7 +26,7 @@ const Header = () => {
 
             <div className='text-center'>
                 <h1 className=' text-3xl font-normal font-serif'>
-                    Inshorts
+                    Flash Feed
                 </h1>
             </div>
 
