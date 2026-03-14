@@ -3,12 +3,18 @@ import ThemeSwitcher from '../UI/ThemeSwitcher'
 import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Button from '../UI/Button'
 
-const Header = () => {
+const Header = ({ handleSidebarToggle }) => {
+      /**
+     * for opening the sidebar 
+     */
+    const handleMenu = () => {
+        handleSidebarToggle()
+    }
   return (
     <div className='grid grid-cols-3 p-3 bg-base shadow'>
             <div className='flex items-center'>
                 <label htmlFor='toggle-sidebar'>
-                    <Bars3Icon className='h-8 px-5 text-base cursor-pointer' />
+                    <Bars3Icon className='h-8 px-5 text-base cursor-pointer' onClick={handleMenu}/>
                 </label>
 
                 <div className='border border-muted flex rounded-full px-6 py-2 ms-5'>

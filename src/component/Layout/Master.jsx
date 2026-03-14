@@ -1,11 +1,30 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Navbar from "../UI/Navbar";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
 
 const Master = () => {
+     const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    /**
+     * to open the sidebar
+     */
+    const handleSidebarToggle = () => {
+        setSidebarOpen(true);
+    };
+
+    /**
+     * to close sidebar
+     */
+    const handleCloseSidebar = () => {
+        setSidebarOpen(false)
+    }
   return (
     <div className="bg-base">
-      <Header />
+      <Header handleSidebarToggle={handleSidebarToggle}/>
+      {/* send props to sidebar  */}
+            <Sidebar isSidebarOpen={isSidebarOpen} onCloseSidebar={handleCloseSidebar} />
       <div className="container mx-auto">
         {/* <Navbar /> */}
         <Outlet />
