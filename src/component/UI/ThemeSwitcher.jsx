@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 const ThemeSwitcher = () => {
 
@@ -12,16 +13,15 @@ const ThemeSwitcher = () => {
     ) {
       return true;
     }
-
     return false;
   });
 
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add("dark");
+      document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
-      document.body.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
@@ -31,23 +31,13 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div>
-      <label className="relative inline-flex items-center cursor-pointer">
-        <input
-          type="checkbox"
-          className="sr-only peer"
-          checked={darkMode}
-          onChange={toggleTheme}
-        />
-        <div className="w-11 h-6 bg-gray-200 rounded-full peer
-        peer-checked:after:translate-x-full
-        peer-checked:after:border-white
-        after:content-[''] after:absolute after:top-0.5
-        after:left-[2px] after:bg-white after:border-gray-300
-        after:border after:rounded-full after:h-5 after:w-5
-        after:transition-all peer-checked:bg-base"></div>
-      </label>
-    </div>
+    <button onClick={toggleTheme} className="p-2 cursor-pointer">
+      {darkMode ? (
+        <SunIcon className="h-6 w-6 text-base" />
+      ) : (
+        <MoonIcon className="h-6 w-6 text-base" />
+      )}
+    </button>
   );
 };
 

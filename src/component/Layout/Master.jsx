@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 
-const Main = () => {
+const Master = () => {
     return (
         <>
             <Header />
@@ -10,4 +10,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default Master
