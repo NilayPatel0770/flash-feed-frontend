@@ -7,9 +7,9 @@ const Routing = () => {
     return (
         <Routes>
             <Route path="/" element={<Master />}>
-                <Route index element={<Navigate to="home" />} />
-                <Route path="home" element={<Home />} />
-                <Route path="saved-news" element={<SavedNews />} />
+                <Route index element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/saved-news" element={<SavedNews />} />
             </Route>
         </Routes>
     )
