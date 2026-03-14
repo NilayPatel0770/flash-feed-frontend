@@ -12,7 +12,9 @@ async function fetchNews() {
     fs.writeFileSync(
       "./public/news.json",
       JSON.stringify(data, null, 2)
-    )
+    );
+
+    console.log("News saved to public/news.json");
   } catch (error) {
     console.error("Error fetching news:", error);
   }
