@@ -9,7 +9,9 @@ const Home = () => {
     usePersonalizedNews();
     const [searchParams] = useSearchParams();
     const search = searchParams.get("search") || "";
-    const { allNews, isLoading, error } = UseNewsData("all_news",search);
+    const category =
+    searchParams.get("category") || "all";
+    const { allNews, isLoading, error } = UseNewsData(category,search);
     if (isLoading) {
         return <p className="text-center mt-10">Loading news...</p>;
   }
@@ -19,23 +21,34 @@ const Home = () => {
 
   return (
     <div className="px-4">
-      {/* Recommended */}
 
-      {!search && recommendedNews.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-main-text mb-6">
-            Recommended For You
-          </h2>
+  {!search && category === "all" && recommendedNews.length > 0 && (
+    <div className="mb-12">
+      <h2 className="text-3xl font-bold text-main-text mb-6">
+        Recommended For You
+      </h2>
 
-          {recommendedNews.map((news) => (
-            <Card key={news._id} news={news} />
-          ))}
-        </div>
-      )}
-      {allNews.map((news) => (
+      {recommendedNews.map((news) => (
         <Card key={news._id} news={news} />
       ))}
     </div>
+  )}
+
+  <div className="mb-8">
+    <h2 className="text-3xl font-bold text-main-text mb-6">
+      {search
+        ? `Search Results for "${search}"`
+        : category === "all"
+        ? "Latest News"
+        : `${category.charAt(0).toUpperCase() + category.slice(1)} News`}
+    </h2>
+
+    {allNews.map((news) => (
+      <Card key={news._id} news={news} />
+    ))}
+  </div>
+
+</div>
   );
 };
 

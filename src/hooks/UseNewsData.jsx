@@ -11,7 +11,8 @@ useEffect(() => {
     setIsLoading(true);
 
     try {
-      const apiCategory = category === "all_news" ? "" : category;
+     const apiCategory =
+    category === "all" ? "" : category;
 
       console.log("Search:", search);
 

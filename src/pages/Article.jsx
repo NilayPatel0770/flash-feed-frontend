@@ -7,7 +7,8 @@ import {
   ClockIcon,
   TagIcon,
 } from "@heroicons/react/24/outline";
-
+import { saveHistory } from "../services/historyService";
+import { useAuth } from "../context/AuthContext";
 import { getArticle } from "../services/articleService";
 import { getRecommendations } from "../services/recommendationService";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +17,7 @@ import BookmarkButton from "../component/Common/BookmarkButton";
 
 const Article = () => {
   const { id } = useParams();
-
+  const { isAuthenticated } = useAuth();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ const Article = () => {
       const res = await getArticle(id);
 
       setArticle(res.data.article);
+       if (isAuthenticated) {
+            await saveHistory(id);
+        }
     } catch (err) {
       console.log(err);
     } finally {

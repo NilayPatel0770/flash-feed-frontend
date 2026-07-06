@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile";
 import Article from "../pages/Article";
+import ReadingHistory from "../pages/ReadingHistory";
 
 const Routing = () => {
   return (
@@ -29,6 +30,7 @@ const Routing = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="saved-news" element={<SavedNews />} />
         <Route path="article/:id" element={<Article />} />
+        <Route path="/history" element={<ReadingHistory />} />
       </Route>
     </Routes>
   );

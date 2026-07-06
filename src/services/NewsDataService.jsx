@@ -10,19 +10,19 @@ import API from "../api/api";
 // to get all news
 export const getAllNewsData = (category, search) => {
 
-  const params = {};
+    const params = {};
 
-  if (category) {
-    params.category = category;
-  }
+    if (category) {
+        params.category = category;
+    }
 
-  if (search) {
-    params.search = search;
-  }
+    if (search) {
+        params.search = search;
+    }
 
-  return API.get("/api/news", {
-    params,
-  });
+    return API.get("/api/news", {
+        params
+    });
 };
 
 
