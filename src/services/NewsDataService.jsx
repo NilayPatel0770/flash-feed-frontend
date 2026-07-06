@@ -1,4 +1,5 @@
 import axios from "axios";
+import API from "../api/api";
 // const baseUrl = "https://inshorts.com/api/en/news?category=";
 // // to get all news
 // export const getAllNewsData = async (category) => {
@@ -7,6 +8,19 @@ import axios from "axios";
 // };
 
 // to get all news
-export const getAllNewsData = async () => {
-  return axios.get("/news.json");
+export const getAllNewsData = async (category = "all") => {
+
+    let url = "/api/news";
+
+    if (category && category !== "all") {
+        url += `?category=${encodeURIComponent(category)}`;
+    }
+
+    console.log("Request URL:", url);
+
+    return API.get(url);
 };
+
+
+
+

@@ -2,7 +2,7 @@ import fs from "fs";
 import fetch from "node-fetch";
 
 const category = "all_news"; // change category if needed
-const url = `https://inshorts.com/api/en/news?category=${category}&max_limit=10&include_card_data=true`;
+const url = `https://inshorts.com/api/en/news?category=${category}&max_limit=10&include _card_data=true`;
 
 async function fetchNews() {
   try {

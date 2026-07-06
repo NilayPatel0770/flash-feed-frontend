@@ -1,7 +1,10 @@
 import { ArrowRightStartOnRectangleIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import React, { useState } from 'react'
+import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
+        const { logout} = useAuth();
+    
       const dummyCategories = [
         { id: 1, name: 'Technology', active: true },
         { id: 2, name: 'Science', active: false },
@@ -46,7 +49,7 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
                     </ul>
                 </div>
                 {/* for logout button */}
-                <div className='flex px-4 py-3'>
+                <div className='flex px-4 py-3' onClick={logout}>
                     <ArrowRightStartOnRectangleIcon className='text-inv-text h-6 cursor-pointer' />
                     <span className='ps-3 text-inv-text'>Logout</span>
                 </div>

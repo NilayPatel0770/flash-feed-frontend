@@ -7,15 +7,19 @@ const useNewsData = (category) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    
     // Define the function inside useEffect to avoid stale closures
     const getNewsData = async () => {
       setIsLoading(true);
+
       try {
-        const res = await getAllNewsData(category);
-        const response = res.data.data.news_list;
-        setAllNews(response);
+        const apiCategory = category === "all_news" ? "" : category;
+
+        const res = await getAllNewsData(apiCategory);
+        console.log("Selected Category:", category);
+        console.log("Called", res);
+        setAllNews(res.data.data);
       } catch (err) {
+        console.log("error", err);
         setError(err);
       } finally {
         setIsLoading(false);

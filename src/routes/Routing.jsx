@@ -1,18 +1,37 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
-import Master from '../component/Layout/Master'
-import Home from '../pages/Home'
-import SavedNews from '../pages/SavedNews'
+import { Navigate, Route, Routes } from "react-router-dom";
+import Master from "../component/Layout/Master";
+import Home from "../pages/Home";
+import SavedNews from "../pages/SavedNews";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import ProtectedRoute from "./ProtectedRoute";
+import Profile from "../pages/Profile";
+import Article from "../pages/Article";
 
 const Routing = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<Master />}>
-                <Route index element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/saved-news" element={<SavedNews />} />
-            </Route>
-        </Routes>
-    )
-}
+  return (
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-export default Routing
+      {/* Protected/Main Layout */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Master />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="/home" />} />
+        <Route path="home" element={<Home />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="saved-news" element={<SavedNews />} />
+        <Route path="article/:id" element={<Article />} />
+      </Route>
+    </Routes>
+  );
+};
+
+export default Routing;
