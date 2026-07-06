@@ -1,33 +1,34 @@
 import { useState, useEffect } from "react";
 import { getAllNewsData } from "../services/NewsDataService";
 
-const useNewsData = (category) => {
+const useNewsData = (category, search) => {
   const [allNews, setAllNews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // Define the function inside useEffect to avoid stale closures
-    const getNewsData = async () => {
-      setIsLoading(true);
+useEffect(() => {
+  const getNewsData = async () => {
+    setIsLoading(true);
 
-      try {
-        const apiCategory = category === "all_news" ? "" : category;
+    try {
+      const apiCategory = category === "all_news" ? "" : category;
 
-        const res = await getAllNewsData(apiCategory);
-        console.log("Selected Category:", category);
-        console.log("Called", res);
-        setAllNews(res.data.data);
-      } catch (err) {
-        console.log("error", err);
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      console.log("Search:", search);
 
-    getNewsData();
-  }, [category]); // Re-run whenever the category changes
+      const res = await getAllNewsData(apiCategory, search);
+
+      console.log("Articles:", res.data.data.length);
+
+      setAllNews(res.data.data);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  getNewsData();
+}, [category, search]);
 
   // Returning an object is better for scaling than returning just the array
   return { allNews, isLoading, error };

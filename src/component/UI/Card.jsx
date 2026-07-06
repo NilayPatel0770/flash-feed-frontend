@@ -15,23 +15,32 @@ import BookmarkButton from "../Common/BookmarkButton";
 const Card = ({ news }) => {
   const date = new Date(news.publishedAt);
   const navigate = useNavigate();
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(date);
+  const formattedDate = news.publishedAt
+  ? new Intl.DateTimeFormat("en-US", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(new Date(news.publishedAt))
+  : "Unknown Date";
 
   return (
-    <div className="mx-auto max-w-7xl bg-card rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-300 cursor-pointer" onClick={() => navigate(`/article/${news._id}`)}>
+    <div
+      className="mx-auto max-w-7xl bg-card rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-300 cursor-pointer"
+      onClick={() => navigate(`/article/${news._id}`)}
+    >
       <div className="md:flex">
         {/* Image */}
 
         <div className="md:w-1/3">
           <img
-            src={news.image}
+            src={
+              news.image && news.image.trim() !== ""
+                ? news.image
+                : "https://placehold.co/600x400?text=Flash+Feed"
+            }
             alt={news.title}
-            className="w-full h-72 object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 
@@ -81,17 +90,10 @@ const Card = ({ news }) => {
           <div className="flex justify-between items-center mt-auto pt-6">
             <div className="flex gap-5">
               <div className="flex items-center gap-5">
+                <LikeButton articleId={news._id} initialCount={news.likes} />
 
-    <LikeButton
-        articleId={news._id}
-        initialCount={news.likes}
-    />
-
-    <BookmarkButton
-        articleId={news._id}
-    />
-
-</div>
+                <BookmarkButton articleId={news._id} />
+              </div>
             </div>
 
             {/* <div className="flex gap-5 text-sm text-muted-text">

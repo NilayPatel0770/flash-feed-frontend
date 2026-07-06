@@ -8,19 +8,22 @@ import API from "../api/api";
 // };
 
 // to get all news
-export const getAllNewsData = async (category = "all") => {
+export const getAllNewsData = (category, search) => {
 
-    let url = "/api/news";
+  const params = {};
 
-    if (category && category !== "all") {
-        url += `?category=${encodeURIComponent(category)}`;
-    }
+  if (category) {
+    params.category = category;
+  }
 
-    console.log("Request URL:", url);
+  if (search) {
+    params.search = search;
+  }
 
-    return API.get(url);
+  return API.get("/api/news", {
+    params,
+  });
 };
-
 
 
 
