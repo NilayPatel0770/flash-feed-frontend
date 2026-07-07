@@ -8,9 +8,17 @@ import API from "../api/api";
 // };
 
 // to get all news
-export const getAllNewsData = (category, search) => {
+export const getAllNewsData = (
+    category,
+    search,
+    page = 1,
+    limit = 10
+) => {
 
-    const params = {};
+    const params = {
+        page,
+        limit
+    };
 
     if (category) {
         params.category = category;
