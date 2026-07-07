@@ -8,7 +8,7 @@ import {
   HeartIcon,
   FireIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useCategories from "../../hooks/useCategories";
@@ -19,7 +19,17 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
 
   const { categories, loading } = useCategories();
   const [searchParams] = useSearchParams();
+    useEffect(() => {
+  if (isSidebarOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [isSidebarOpen]);
   const currentCategory = searchParams.get("category") || "all";
   const handleCategoryClick = (category) => {
     const params = new URLSearchParams(searchParams);
@@ -36,11 +46,13 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
   };
   return (
     // sidebar started
-    <div
-      className={`bg-inv-bg text-primary  shadow absolute transition-all duration-300 ease-in-out top-0  w-64 h-full z-[60] ${isSidebarOpen ? "left-[0]" : "left-[-270px]"}`}
-    >
+   <div
+  className={`fixed top-0 left-0 h-screen w-64 bg-inv-bg text-primary shadow-lg z-[100]
+  transition-transform duration-300 ease-in-out
+  ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+>
       {/* Your sidebar content */}
-      <div className="flex flex-col h-full justify-between">
+      <div className="flex flex-col h-full justify-between overflow-y-auto">
         <div className="">
           <div className="flex items-center my-3">
             <ChevronLeftIcon

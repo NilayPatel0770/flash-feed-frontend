@@ -87,7 +87,7 @@ const Card = ({ news }) => {
                 e.stopPropagation();
                 navigate(`/article/${news._id}`);
               }}
-              className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+              className="px-5 py-2 rounded-lg bg-[#101b30] text-white hover:bg-blue-700 transition"
             >
               Read Full Article →
             </button>

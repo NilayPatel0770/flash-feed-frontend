@@ -46,21 +46,6 @@ const Home = () => {
 
   return (
     <div className="px-4">
-      {!search && category === "all" && recommendedNews.length > 0 && (
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-main-text mb-6">
-            Recommended For You
-          </h2>
-
-          {recommendedNews.map((news) => (
-            <div key={news._id}>
-              <h2 className="text-red-500 font-bold">Recommended</h2>
-              <Card news={news} />
-            </div>
-          ))}
-        </div>
-      )}
-
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-main-text mb-6">
           {search
@@ -81,6 +66,21 @@ const Home = () => {
           return <Card key={news._id} news={news} />;
         })}
       </div>
+      {!search && category === "all" && recommendedNews.length > 0 && (
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-main-text mb-6">
+            Recommended For You
+          </h2>
+
+          {recommendedNews.map((news) => (
+            <div key={news._id}>
+              <h2 className="text-red-500 font-bold">Recommended</h2>
+              <Card news={news} />
+            </div>
+          ))}
+        </div>
+      )}
+
       {isLoadingMore &&
         [...Array(3)].map((_, index) => <CardSkeleton key={index} />)}
       {!hasMore && allNews.length > 0 && (

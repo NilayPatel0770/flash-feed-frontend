@@ -14,6 +14,7 @@ import { getRecommendations } from "../services/recommendationService";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../component/Common/LikeButton";
 import BookmarkButton from "../component/Common/BookmarkButton";
+import ShareButton from "../component/Common/ShareButton";
 
 const Article = () => {
   const { id } = useParams();
@@ -158,7 +159,7 @@ const Article = () => {
           </div>
 
           <div className="flex items-center gap-2 text-main-text">
-            <LikeButton articleId={news._id} initialCount={news.likes} />
+            <LikeButton articleId={article._id} initialCount={article.likes} />
           </div>
 
           <div className="flex items-center gap-2 text-main-text">
@@ -167,6 +168,7 @@ const Article = () => {
               initialCount={article.bookmarks}
             />
           </div>
+          <ShareButton article={article} />
         </div>
 
         {/* Right Side */}
