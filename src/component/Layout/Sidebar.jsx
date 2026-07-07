@@ -5,6 +5,8 @@ import {
   BookmarkIcon,
   UserIcon,
   ClockIcon,
+  HeartIcon,
+  FireIcon,
 } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
@@ -61,6 +63,17 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
 
             <button
               onClick={() => {
+                navigate("/trending");
+                onCloseSidebar();
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 text-inv-text hover:bg-gray-700"
+            >
+              <FireIcon className="w-5 h-5" />
+              Trending
+            </button>
+
+            <button
+              onClick={() => {
                 navigate("/saved-news");
                 onCloseSidebar();
               }}
@@ -79,6 +92,17 @@ const Sidebar = ({ isSidebarOpen, onCloseSidebar }) => {
             >
               <ClockIcon className="w-5 h-5" />
               Reading History
+            </button>
+
+            <button
+              onClick={() => {
+                navigate("/liked");
+                onCloseSidebar();
+              }}
+              className="w-full flex items-center gap-3 px-4 py-3 text-inv-text hover:bg-gray-700"
+            >
+              <HeartIcon className="w-5 h-5" />
+              Liked Articles
             </button>
 
             <button

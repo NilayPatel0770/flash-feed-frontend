@@ -7,7 +7,6 @@ const ReadingHistory = () => {
         history,
         loading
     } = useHistory();
-    console.log(history);
     
     if (loading) {
         return <p className="text-center py-10">Loading...</p>;

@@ -29,8 +29,11 @@ const Home = () => {
       </h2>
 
       {recommendedNews.map((news) => (
-        <Card key={news._id} news={news} />
-      ))}
+    <div key={news._id}>
+        <h2 className="text-red-500 font-bold">Recommended</h2>
+        <Card news={news} />
+    </div>
+))}
     </div>
   )}
 
@@ -44,8 +47,11 @@ const Home = () => {
     </h2>
 
     {allNews.map((news) => (
-      <Card key={news._id} news={news} />
-    ))}
+    <div key={news._id}>
+        <h2 className="text-green-500 font-bold">All News</h2>
+        <Card news={news} />
+    </div>
+))}
   </div>
 
 </div>

@@ -11,3 +11,7 @@ export const bookmarkArticle = (id) =>
 
 export const removeBookmark = (id) =>
     API.delete(`/api/news/${id}/bookmark`);
+
+export const getBookmarks = () => {
+  return API.get("/api/news/bookmarks");
+};

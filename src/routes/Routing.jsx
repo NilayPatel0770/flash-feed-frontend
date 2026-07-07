@@ -8,6 +8,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../pages/Profile";
 import Article from "../pages/Article";
 import ReadingHistory from "../pages/ReadingHistory";
+import LikedArticles from "../pages/LikedArticles";
+import Trending from "../pages/Trending";
 
 const Routing = () => {
   return (
@@ -31,6 +33,8 @@ const Routing = () => {
         <Route path="saved-news" element={<SavedNews />} />
         <Route path="article/:id" element={<Article />} />
         <Route path="/history" element={<ReadingHistory />} />
+        <Route path="/liked" element={<LikedArticles />} />
+        <Route path="/trending" element={<Trending />} />
       </Route>
     </Routes>
   );

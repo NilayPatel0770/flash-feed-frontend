@@ -5,9 +5,6 @@ import {
   EyeIcon,
   ClockIcon,
 } from "@heroicons/react/24/outline";
-
-import SaveForLater from "../../feature/SaveForLater";
-import ManageLike from "../../feature/ManageLike";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../Common/LikeButton";
 import BookmarkButton from "../Common/BookmarkButton";
@@ -16,17 +13,16 @@ const Card = ({ news }) => {
   const date = new Date(news.publishedAt);
   const navigate = useNavigate();
   const formattedDate = news.publishedAt
-  ? new Intl.DateTimeFormat("en-US", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }).format(new Date(news.publishedAt))
-  : "Unknown Date";
-
+    ? new Intl.DateTimeFormat("en-US", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(new Date(news.publishedAt))
+    : "Unknown Date";
   return (
     <div
-      className="mx-auto max-w-7xl bg-card rounded-2xl shadow-lg overflow-hidden mb-8 transition-colors duration-300 cursor-pointer"
+      className="mx-auto max-w-7xl bg-card rounded-2xl shadow-lg overflow-hidden mb-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
       onClick={() => navigate(`/article/${news._id}`)}
     >
       <div className="md:flex">
@@ -40,7 +36,7 @@ const Card = ({ news }) => {
                 : "https://placehold.co/600x400?text=Flash+Feed"
             }
             alt={news.title}
-            className="w-full h-full object-cover"
+            className="w-full h-64 md:h-full object-cover"
           />
         </div>
 
@@ -49,7 +45,7 @@ const Card = ({ news }) => {
         <div className="md:w-2/3 p-6 flex flex-col">
           {/* Category */}
 
-          <span className="text-xs uppercase tracking-wider text-blue-600 font-semibold">
+          <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
             {news.category}
           </span>
 
@@ -85,36 +81,55 @@ const Card = ({ news }) => {
             </ul>
           </div>
 
+          <div className="mt-6">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/article/${news._id}`);
+              }}
+              className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+            >
+              Read Full Article →
+            </button>
+          </div>
+
           {/* Footer */}
 
-          <div className="flex justify-between items-center mt-auto pt-6">
-            <div className="flex gap-5">
-              <div className="flex items-center gap-5">
-                <LikeButton articleId={news._id} initialCount={news.likes} />
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center mt-auto pt-6 gap-4">
+            {/* Like & Bookmark */}
 
-                <BookmarkButton articleId={news._id} />
-              </div>
+            <div className="flex items-center gap-5">
+              <LikeButton
+                articleId={news._id}
+                initialCount={news.likes}
+                showCount={true}
+              />
+
+              <BookmarkButton
+                articleId={news._id}
+                initialCount={news.bookmarks}
+                initialBookmarked={news.isBookmarked}
+              />
             </div>
 
-            {/* <div className="flex gap-5 text-sm text-muted-text">
+            {/* Stats */}
+
+            <div className="flex items-center gap-6 text-sm text-muted-text">
               <div className="flex items-center gap-1">
                 <EyeIcon className="w-5 h-5" />
-
-                {news.views}
+                <span>{news.views || 0}</span>
               </div>
 
               <div className="flex items-center gap-1">
-                <HeartIcon className="w-5 h-5" />
-
-                {news.likes}
+                <HeartIcon className="w-5 h-5 text-red-500" />
+                <span>{news.likes || 0}</span>
               </div>
 
               <div className="flex items-center gap-1">
-                <BookmarkIcon className="w-5 h-5" />
-
-                {news.bookmarks}
+                <BookmarkIcon className="w-5 h-5 text-blue-500" />
+                <span>{news.bookmarks || 0}</span>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -33,9 +33,9 @@ const Article = () => {
       const res = await getArticle(id);
 
       setArticle(res.data.article);
-       if (isAuthenticated) {
-            await saveHistory(id);
-        }
+      if (isAuthenticated) {
+        await saveHistory(id);
+      }
     } catch (err) {
       console.log(err);
     } finally {
@@ -158,7 +158,7 @@ const Article = () => {
           </div>
 
           <div className="flex items-center gap-2 text-main-text">
-            <LikeButton articleId={article._id} initialCount={article.likes} />
+            <LikeButton articleId={news._id} initialCount={news.likes} />
           </div>
 
           <div className="flex items-center gap-2 text-main-text">

@@ -14,11 +14,7 @@ useEffect(() => {
      const apiCategory =
     category === "all" ? "" : category;
 
-      console.log("Search:", search);
-
       const res = await getAllNewsData(apiCategory, search);
-
-      console.log("Articles:", res.data.data.length);
 
       setAllNews(res.data.data);
     } catch (err) {
