@@ -3,6 +3,7 @@ import UseNewsData from "../hooks/UseNewsData";
 import Card from "../component/UI/Card";
 import usePersonalizedNews from "../hooks/usePersonalizedNews";
 import { useSearchParams } from "react-router-dom";
+import CardSkeleton from "../component/UI/CardSkeleton";
 
 const Home = () => {
   const { news: recommendedNews, loading: recommendationLoading } =
@@ -10,18 +11,17 @@ const Home = () => {
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search") || "";
   const category = searchParams.get("category") || "all";
-  const {  allNews,
-  isLoading,
-  isLoadingMore,
-  error,
-  hasMore,
-  loadMore} = UseNewsData(
-    category,
-    search,
-  );
+  const { allNews, isLoading, isLoadingMore, error, hasMore, loadMore } =
+    UseNewsData(category, search);
   const observer = useRef();
   if (isLoading) {
-    return <p className="text-center mt-10">Loading news...</p>;
+    return (
+      <div className="px-4">
+        {[...Array(5)].map((_, index) => (
+          <CardSkeleton key={index} />
+        ))}
+      </div>
+    );
   }
   if (error) {
     return <p className="text-center mt-10">Error loading news</p>;
@@ -81,16 +81,13 @@ const Home = () => {
           return <Card key={news._id} news={news} />;
         })}
       </div>
-      {isLoadingMore  && (
-  <div className="text-center py-6 text-main-text">
-    Loading more articles...
-  </div>
-)}
-{!hasMore && allNews.length > 0 && (
-  <div className="text-center py-6 text-muted-text">
-     You've reached the end.
-  </div>
-)}
+      {isLoadingMore &&
+        [...Array(3)].map((_, index) => <CardSkeleton key={index} />)}
+      {!hasMore && allNews.length > 0 && (
+        <div className="text-center py-6 text-muted-text">
+          You've reached the end.
+        </div>
+      )}
     </div>
   );
 };
